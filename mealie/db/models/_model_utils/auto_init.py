@@ -42,6 +42,11 @@ def _get_config(relation_cls: type[SqlAlchemyBase]) -> AutoInitConfig:
         if attr in cfgKeys:
             setattr(cfg, attr, class_config[attr])
 
+    # A class-level exclude names the relationships it handles itself, so it has to
+    # add to the default rather than replace it. Dropping "id" lets auto_init write
+    # the row's own primary key while updating it.
+    cfg.exclude = set(cfg.exclude) | _default_exclusion()
+
     return cfg
 
 
