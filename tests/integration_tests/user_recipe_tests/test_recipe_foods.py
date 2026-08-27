@@ -49,7 +49,6 @@ def test_read_food(api_client: TestClient, food: dict, unique_user: TestUser):
 
 def test_update_food(api_client: TestClient, food: dict, unique_user: TestUser):
     update_data = {
-        "id": food["id"],
         "name": random_string(10),
         "description": random_string(10),
     }

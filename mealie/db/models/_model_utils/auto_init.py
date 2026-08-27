@@ -42,6 +42,8 @@ def _get_config(relation_cls: type[SqlAlchemyBase]) -> AutoInitConfig:
         if attr in cfgKeys:
             setattr(cfg, attr, class_config[attr])
 
+    cfg.exclude = set(cfg.exclude) | _default_exclusion()
+
     return cfg
 
 
